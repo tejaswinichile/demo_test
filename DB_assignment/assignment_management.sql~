@@ -149,19 +149,6 @@ select group_concat(concat('results.assessments_questions_id,results.user_answer
 set @sql=concat('select results.user_id,',@sql,'from results');
 prepare stmt from @ sql;
 
-/*working properly*/
-
-set @sql=null;
-
-select group_concat(distinct concat('if(p.assessment_questions_id = ''',assessment_questions_id,''',user_answer,NULL) as ',quote(assessment_questions_id))) into @sql from results p;
-
-set @sql = concat('select p.id,',@sql,' from results p');
-
-prepare stmt from @sql;
-
-execute stmt;
-
-
 
 
 
